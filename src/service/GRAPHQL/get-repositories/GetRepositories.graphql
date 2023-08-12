@@ -1,0 +1,15 @@
+## getRepositories.graphql
+#query GetRepositories($query: String!, $first: Int!, $after: String) {
+#    search(query: $query, type: REPOSITORY, first: $first, after: $after) {
+#        edges {
+#            node {
+#                ... on Repository {
+#                    name
+#                    stargazerCount
+#                    pushedAt
+#                    url
+#                }
+#            }
+#        }
+#    }
+#}
