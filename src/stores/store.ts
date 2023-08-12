@@ -26,7 +26,7 @@ export const UseRepositoryStore = defineStore({
             localStorage.setItem('current_page', JSON.stringify(page))
         },
         setTotalPage(total: number) {
-            localStorage.setItem('total_pages', String(total));
+            localStorage.setItem('total_pages', JSON.stringify(total));
             this.total_pages = total
         },
         updateAboutRep(rep: Repository) {

@@ -3,7 +3,7 @@ import SearchComponent from "@/components/search-component.vue";
 import ResultComponent from "@/components/result-component.vue";
 import {Debounce} from "@/modules/debounce";
 import {GetUserRepositories, SearchRepositories} from "@/service/REST_API/github";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {UseRepositoryStore} from "@/stores/store";
 import SkeletonComponent from "@/components/skeleton-component.vue";
 import PaginationComponent from "@/components/pagination-component.vue";
@@ -11,7 +11,6 @@ import PaginationComponent from "@/components/pagination-component.vue";
 
 const repositoryStore = UseRepositoryStore();
 
-const searchQuery = localStorage.getItem('searchQuery')
 let userLog = localStorage.getItem('userLogin')
 
 const debounce = new Debounce(SearchRepositories, 500);
@@ -23,7 +22,7 @@ const setSearch = async (val: string) => {
     await searchRepositories(val)
   }
 }
-const searchRepositories = async (val: string = searchQuery) => {
+const searchRepositories = async (val = localStorage.getItem('searchQuery')) => {
   if(val.length <= 2) {
     return
   }
@@ -79,8 +78,9 @@ onMounted(async () => {
     localStorage.setItem('userLogin', userLog);
   }
 
-  if (searchQuery && searchQuery !== '') {
-    await searchRepositories(searchQuery);
+  const query = localStorage.getItem('searchQuery')
+  if (query && query !== '') {
+    await searchRepositories(query);
   } else {
     await getUserRepositories(userLog);
   }
