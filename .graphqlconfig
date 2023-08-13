@@ -1,0 +1,14 @@
+{
+  "name": "graphql-project",
+  "schemaPath": "path-to-your-schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "default": {
+        "url": "https://api.github.com/graphql",
+        "headers": {
+          "Authorization": "Bearer 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"
+        }
+      }
+    }
+  }
+}

@@ -13,8 +13,11 @@
   },
   "dependencies": {
     "@apollo/client": "^3.8.1",
+    "@vue/apollo-composable": "^4.0.0-beta.8",
     "axios": "^1.4.0",
     "graphql": "^16.7.1",
+    "graphql-tag": "^2.12.6",
+    "lodash.debounce": "^4.0.8",
     "pinia": "^2.1.4",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"

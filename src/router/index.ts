@@ -13,7 +13,7 @@ const router = createRouter({
       path: '/:full_name',
       name: "RepositoryDetail",
       component: () => import('@/views/_full_name/index.vue')
-    }
+    },
   ]
 })
 

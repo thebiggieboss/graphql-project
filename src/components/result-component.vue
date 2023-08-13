@@ -22,7 +22,7 @@ defineProps({
           :key="index"
       >
 
-        <RouterLink :to="{ name: 'RepositoryDetail', params: { full_name: item.full_name } }">
+        <RouterLink :to="{ name: 'RepositoryDetail',params: { full_name: item.full_name }, query: {owner: item.owner.login, repos: item.name} }">
           <div class="result-component__info">
               <img class="result-component__info--img" :src="item.owner.avatar_url" alt="">
               <p class="result-component__info--name" v-html="item.full_name"></p>

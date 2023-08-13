@@ -1,32 +1,24 @@
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
-import {GetInformationRepository} from "@/service/REST_API/github";
+import {onMounted, ref, watch} from "vue";
 import {useRoute} from "vue-router";
 import {UseRepositoryStore} from "@/stores/store";
 import AboutRepositoryComponent from "@/components/about-repository-component.vue";
 import SkeletonComponent from "@/components/skeleton-component.vue";
-
-const isLoader = ref(false)
+import {GetInformation} from "@/service/GRAPHQL/queries";
 const route = useRoute();
 const repositoryStore = UseRepositoryStore();
-const getInformationRepository = async () => {
-  isLoader.value = true
-  try {
-    repositoryStore.aboutRep = await GetInformationRepository(route.params.full_name as string)
-  } catch (e) {
-    console.log(e)
-  } finally {
-    isLoader.value = false;
-  }
-}
-onMounted(() => {
-  getInformationRepository()
+
+
+const { result, loading, error } = GetInformation(route.query?.owner, route.query?.repos);
+
+watch(result, value => {
+  repositoryStore.aboutRep = value?.repository
 })
 </script>
 
 <template>
   <div>
-    <template v-if="isLoader">
+    <template v-if="loading">
       <skeleton-component  height="450px" quantity="1" width="100%"/>
     </template>
     <template v-else>

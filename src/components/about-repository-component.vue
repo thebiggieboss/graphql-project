@@ -15,7 +15,7 @@ defineProps({
 <template>
   <div class="about-repository-component">
     <div class="about-repository-component__content wrapper">
-      <router-link to="/">
+      <router-link to="/" style="max-width: max-content">
         <img
             src="/icons/back-button.svg"
             alt=""
@@ -23,32 +23,32 @@ defineProps({
         >
       </router-link>
       <div class="about-repository-component__block">
-        <img class="about-repository-component__avatar" :src="about?.owner?.avatar_url" alt="">
+        <img class="about-repository-component__avatar" :src="about?.owner?.avatarUrl" alt="">
         <div class="about-repository-component__info">
           <p class="about-repository-component__info--title">
-            <span style="color: black">Owner:</span> <a :href="about?.owner?.html_url" target="_blank">{{about?.owner?.login}}</a>
+            <span style="color: black">Owner:</span> <a :href="about?.url" target="_blank">{{about?.owner?.login}}</a>
           </p>
           <p class="about-repository-component__info--title">
             <span style="color: black">Repository:</span>
-            {{about?.full_name}}
+            {{about?.name}}
           </p>
           <p class="about-repository-component__info--title">
-            <span style="color: black">Language:</span> {{about?.language}}
+            <span style="color: black">Language:</span> {{about?.primaryLanguage?.name}}
           </p>
           <div class="about-repository-component__stargazers">
             <img src="/icons/star-icon.svg" alt="" class="about-repository-component__stargazers--star">
-            <p><span style="color: black">Stargazers:</span> {{about?.stargazers_count}}</p>
+            <p><span style="color: black">Stargazers:</span> {{about?.stargazerCount}}</p>
           </div>
           <p class="about-repository-component__info--title">
             <span style="color: black">Updated:</span> {{getTimeAgo(about?.updated_at)}}
           </p>
           <div class="about-repository-component__topics">
             <div
-                v-for="(el, elIndex) in about?.topics"
+                v-for="(el, elIndex) in about?.languages?.nodes"
                 :key="`topics-${elIndex}`"
                 class="about-repository-component__topic"
             >
-              <a :href="`https://github.com/topics/${el}`" target="_blank">{{el}}</a>
+              <a :href="`https://github.com/topics/${el.name}`" target="_blank">{{el.name}}</a>
             </div>
           </div>
           <p class="about-repository-component__info--title">
